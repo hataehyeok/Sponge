@@ -11,12 +11,15 @@
 class ByteStream {
   private:
     // Your code here -- add private members as necessary.
-
     // Hint: This doesn't need to be a sophisticated data structure at
     // all, but if any of your tests are taking longer than a second,
     // that's a sign that you probably want to keep exploring
     // different approaches.
-
+    size_t _capacity{};    // The total capacity of buffer
+    size_t _write_sum{};    // Index of next input write
+    size_t _read_sum{};   // Index of next output read
+    bool _reach_eof{};      // Flag indication that the stream is fulled
+    std::string _buffer{};
     bool _error{};  //!< Flag indicating that the stream suffered an error.
 
   public:
