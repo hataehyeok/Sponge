@@ -16,8 +16,8 @@ class ByteStream {
     // that's a sign that you probably want to keep exploring
     // different approaches.
     size_t _capacity{};    // The total capacity of buffer
-    size_t _write_sum{};    // Index of next input write
-    size_t _read_sum{};   // Index of next output read
+    size_t _write_sum{};    // Total byte of write stream
+    size_t _read_sum{};   // Total byte of read stream
     bool _reach_eof{};      // Flag indication that the stream is fulled
     std::string _buffer{};
     bool _error{};  //!< Flag indicating that the stream suffered an error.
