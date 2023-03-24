@@ -1,13 +1,13 @@
 Assignment 2 Writeup
 =============
 
-My name: [your name here]
+My name: Taehyeok Ha
 
-My POVIS ID: [your povis id here]
+My POVIS ID: hth021002
 
-My student ID (numeric): [your student id here]
+My student ID (numeric): 20210273
 
-This assignment took me about [n] hours to do (including the time on studying, designing, and writing the code).
+This assignment took me about [20] hours to do (including the time on studying, designing, and writing the code).
 
 If you used any part of best-submission codes, specify all the best-submission numbers that you used (e.g., 1, 2): []
 
