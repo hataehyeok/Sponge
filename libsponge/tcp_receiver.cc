@@ -19,16 +19,17 @@ void TCPReceiver::segment_received(const TCPSegment &seg) {
     // numbers and a different random ISN.)
     const TCPHeader &tcp_header = seg.header();
 
-    if (tcp_header.syn && !self.exist_syn) {
-        self.exist_syn = true;
-        self._isn = tcp_header.seqno;
+    if (tcp_header.syn && !_exist_syn) {
+        _exist_syn = true;
+        _isn = tcp_header.seqno;
     }
-
-
-
 
 }
 
-optional<WrappingInt32> TCPReceiver::ackno() const { return {}; }
+optional<WrappingInt32> TCPReceiver::ackno() const {
 
-size_t TCPReceiver::window_size() const { return {}; }
+}
+
+size_t TCPReceiver::window_size() const {
+    return _capacity - _reassembler.stream_out().buffer_size();
+}

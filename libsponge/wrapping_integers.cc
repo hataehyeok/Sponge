@@ -31,8 +31,9 @@ WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) {
 uint64_t unwrap(WrappingInt32 n, WrappingInt32 isn, uint64_t checkpoint) {
     DUMMY_CODE(n, isn, checkpoint);
     const uint32_t diff = n - wrap(checkpoint, isn);
-    if (diff >= (1u << 31) && checkpoint + static_cast<int64_t>(diff) >= (1ul << 32)) {
-        return checkpoint + static_cast<int64_t>(diff);
+
+    if (diff >= (1u << 31) && (checkpoint + diff) >= (1ul << 32)) {
+        return checkpoint + static_cast<int32_t>(diff);
     }
-    return checkpoint + static_cast<int64_t>(diff);
+    return checkpoint + diff;
 }
