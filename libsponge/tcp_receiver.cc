@@ -12,6 +12,21 @@ using namespace std;
 
 void TCPReceiver::segment_received(const TCPSegment &seg) {
     DUMMY_CODE(seg);
+
+    // These sequence numbers(seqnos) are transmitted
+    // in the header of each TCP segment. (And, again, there are two
+    // streams—one in each direction. Each stream has separate sequence
+    // numbers and a different random ISN.)
+    const TCPHeader &tcp_header = seg.header();
+
+    if (tcp_header.syn && !self.exist_syn) {
+        self.exist_syn = true;
+        self._isn = tcp_header.seqno;
+    }
+
+
+
+
 }
 
 optional<WrappingInt32> TCPReceiver::ackno() const { return {}; }
