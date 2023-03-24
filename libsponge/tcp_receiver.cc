@@ -24,12 +24,24 @@ void TCPReceiver::segment_received(const TCPSegment &seg) {
         _isn = tcp_header.seqno;
     }
 
+    _reassembler.stream_out().bytes_written();
+
 }
 
 optional<WrappingInt32> TCPReceiver::ackno() const {
-
+    if (_exist_syn) {
+        size_t temp = _reassembler.stream_out().bytes_written() + 1;
+        if (_exist_fin && _reassembler.stream_out().input_ended()) {
+            temp++;
+        }
+        return wrap(temp, _isn);
+    }
+    else {
+        return std::nullopt_t;
+    }
 }
 
 size_t TCPReceiver::window_size() const {
-    return _capacity - _reassembler.stream_out().buffer_size();
+    //return _capacity - _reassembler.stream_out().buffer_size();
+    return _reassembler.stream_out().remaining_capacity();
 }
