@@ -31,6 +31,29 @@ class TCPSender {
 
     //! the (absolute) sequence number for the next byte to be sent
     uint64_t _next_seqno{0};
+    uint64_t _abs_ackno{0};
+    
+    //! Check for this seg need syn or fin
+    bool _exist_syn = false;
+    bool _exist_fin = false;
+
+    //! Be sent but not yet acknowledged by receiver
+    uint64_t _bytes_in_flight = 0;
+
+    uint16_t _rwnd = 0;
+    uint16_t avail_wnd = 0;
+    uint16_t _consecutive_retransmissions = 0;
+
+    //! Variable relative with timer
+    unsigned int _rto = 0;
+    unsigned int _time_elaps = 0;
+    bool _turn_timer = false;
+    
+    //! Save sent segment but not yet ack
+    std::queue<TCPSegment> _segments_outstanding{};
+
+    //! Function for send segment
+    void send_segment(TCPSegment &seg);
 
   public:
     //! Initialize a TCPSender
