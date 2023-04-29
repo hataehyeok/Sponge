@@ -1,4 +1,5 @@
-#include "socket.hh"
+// #include "socket.hh"
+#include "tcp_sponge_socket.hh"
 #include "util.hh"
 
 #include <cstdlib>
@@ -10,7 +11,8 @@ void get_URL(const string &host, const string &path) {
     // Your code here.
 
     // use TCP socket, Address class
-    TCPSocket socket;
+    //TCPSocket socket;
+    CS144TCPSocket socket;
     socket.connect(Address(host, "http"));
 
     //client's request
@@ -33,6 +35,7 @@ void get_URL(const string &host, const string &path) {
 
     cerr << "Function called: get_URL(" << host << ", " << path << ").\n";
     cerr << "Warning: get_URL() has not been implemented yet.\n";
+    socket.wait_until_closed();
 }
 
 int main(int argc, char *argv[]) {
