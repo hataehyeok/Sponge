@@ -12,7 +12,8 @@ void get_URL(const string &host, const string &path) {
 
     // use TCP socket, Address class
     //TCPSocket socket;
-    CS144TCPSocket socket;
+    //CS144TCPSocket socket;
+    FullStackSocket socket;
     socket.connect(Address(host, "http"));
 
     //client's request
