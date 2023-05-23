@@ -55,6 +55,10 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "thread": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "cerrno": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "queue": "cpp"
     }
 }
