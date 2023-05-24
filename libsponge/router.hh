@@ -62,8 +62,49 @@ class Router {
     
     // struct Node {
     //     Node* child[2] = {nullptr, nullptr};
-    //     std::optional<int> val;
+    //     std::optional<Entry> val = std::nullopt;
     // };
+
+    // class RadixTree {
+    //     public:
+    //         Node* root = new Node();
+    //         //Node root = Node();
+
+    //         void insert(const Entry& entry) {
+    //             Node* node = root;
+    //             uint32_t ip = entry._route_prefix;
+    //             int len = entry._prefix_length;
+    //             for (int i = 31; i >= 32 - len; --i) {
+    //                 bool bit = ip & (1 << i);
+    //                 if (!node->child[bit]) {
+    //                     node->child[bit] = new Node();
+    //                     //continue;
+    //                 }
+    //                 node = node->child[bit];
+    //             }
+    //             //node->val = entry;
+    //             node->val.emplace(entry);
+    //         }
+
+    //         std::optional<Entry> longest_match(uint32_t ip) {
+    //             Node* node = root;
+    //             std::optional<Entry> last_val = std::nullopt;
+    //             for (int i = 31; i >= 0; --i) {
+    //                 bool bit = ip & (1 << i);
+    //                 if (!node->child[bit]) {
+    //                     break;
+    //                 }
+    //                 node = node->child[bit];
+    //                 if (node->val.has_value()) {
+    //                     //last_val = node->val;
+    //                     last_val.emplace(*(node->val));
+    //                 }
+    //             }
+    //             return last_val;
+    //         }
+    // };
+
+    // RadixTree routing_table = RadixTree();
 
   public:
     //! Add an interface to the router

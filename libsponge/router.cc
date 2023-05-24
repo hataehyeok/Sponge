@@ -31,6 +31,7 @@ void Router::add_route(const uint32_t route_prefix,
 
     // Your code here.
     routing_table.push_back({route_prefix, prefix_length, next_hop, interface_num, ~(0xFFFFFFFF >> prefix_length)});
+    //routing_table.insert({route_prefix, prefix_length, next_hop, interface_num, ~(0xFFFFFFFF >> prefix_length)});
 }
 
 //! \param[in] dgram The datagram to be routed
@@ -39,6 +40,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
     if (dgram.header().ttl <= 1) {
         return;
     }
+    dgram.header().ttl -= 1;
     // longest prefix match
     uint32_t dst_addr = dgram.header().dst;
     int longest_len = -1;
@@ -51,12 +53,23 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
             match_index = i;
         }
     }
+    // auto result = routing_table.longest_match(dst_addr);
+    // if (!result.has_value()) {
+    //     return;     // Drop
+    // }
+    
 
     if (longest_len < 0) {
         return;     // Drop
     }
 
-    dgram.header().ttl -= 1;
+    
+    // const Entry& entry = result.value();
+    // if (entry._next_hop.has_value()) {
+    //     _interfaces[entry._interface_num].send_datagram(dgram, entry._next_hop.value());
+    // } else {
+    //     _interfaces[entry._interface_num].send_datagram(dgram, Address::from_ipv4_numeric(dst_addr));
+    // }
 
     if (routing_table[match_index]._next_hop.has_value()) {
         _interfaces[routing_table[match_index]._interface_num].send_datagram(dgram, routing_table[match_index]._next_hop.value());
